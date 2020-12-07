@@ -1,0 +1,27 @@
+#title {
+    text-align: center;
+}
+
+.section {
+    margin-bottom: 10%;
+}
+
+.article {
+    border-left: #e3d19e solid 2px;
+    border-right: #e3d19e solid 2px;
+}
+
+.chamtitle {
+    position: relative;
+    width: 400px;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-top: 30px solid #e3d19e;
+    margin: 0px auto;
+}
+
+.chamtitle>h5 {
+    position: absolute;
+    top: -30px;
+    left: 60px;
+}

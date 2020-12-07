@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.blog.model.dao.video.VideoPostDao">
+
+    <!-- 게시물 등록 -->
+    <insert id="insert">
+        insert into videopost(userNo,video,thumbnail,data,isprivate)
+        values (#{userNo},#{video},#{thumbnail},#{data},#{isPrivate})
+    </insert>
+
+    <!-- 리스트 검색 -->
+    <select id="search" resultType="VideoPostItem">
+        SELECT 
+            videoPostNo, 
+            v.userNo, 
+            userNickname, 
+            userImage, 
+            thumbnail, 
+            isPrivate, 
+            view, 
+            postdate, 
+            (select count(*) from videopostlikes l where l.videoPostNo = v.videoPostNo) totalLike 
+        from videopost v inner join user u on v.userNo = u.userNo 
+        where ${option}
+        order by ${orderBy} desc
+	    limit #{limit} offset #{offset}
+    </select>
+
+    <!-- 게시물 상세 조회-->
+    <select id="detail" resultType="VideoPostDetail">
+        SELECT 
+            videoPostNo, 
+            v.userNo, 
+            userNickname, 
+            userImage, 
+            concat(userSolTierStr," ",userSolRankStr) userRank, 
+            concat(userGameTierStr," ",userGameRankStr) gameRank, 
+            video, 
+            data, 
+            isPrivate, 
+            view, 
+            postdate, 
+            (select count(*) from videopostlikes l where l.videoPostNo = v.videoPostNo) totalLike 
+        from videopost v inner join user u on v.userNo = u.userNo
+        where videopostno = #{videoPostNo}
+    </select>
+
+    <!-- 게시물 삭제 -->
+    <delete id="delete">
+        delete from videopost 
+        where videoPostNo = #{videoPostNo}
+    </delete>
+
+    <!-- 게시물 수정-->
+    <update id="update">
+        update videopost 
+        set 
+            thumbnail=#{thumbnail},
+            data=#{data},
+            isPrivate=#{isPrivate},
+        where videoPostNo = #{videoPostNo}
+    </update>
+
+    <!-- 방문자 증가 -->
+    <update id="viewCount">
+        update videopost
+        set view = #{view}+1
+        where videoPostNo=#{videoPostNo}
+    </update>
+
+</mapper>

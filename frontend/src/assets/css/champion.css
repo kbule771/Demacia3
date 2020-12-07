@@ -1,0 +1,31 @@
+#title {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.rank {
+    text-align: left;
+}
+
+.sub {
+    padding-top: 5%;
+}
+
+.article {
+    margin-bottom: 5%;
+}
+
+
+.box {
+    opacity: 0.8;
+    background: linear-gradient(180deg,
+            rgba(14, 36, 56, 1) 0%,
+            rgba(32, 17, 95, 1) 100%);
+    border: #fcd000 3px ridge;
+    box-shadow: 5px 5px 5px;
+    color: #e3d19e;
+}
+
+.rankimg {
+    width: 150px;
+}
